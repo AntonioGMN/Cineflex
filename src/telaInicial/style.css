@@ -1,0 +1,23 @@
+.filmes {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.filme {
+	height: 209px;
+	width: 145px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+
+	border-radius: 3px;
+	box-shadow: 0px 2px 4px 2px #0000001a;
+}
+
+.filmes img {
+	height: 193px;
+	width: 129px;
+	border-radius: 0px;
+}

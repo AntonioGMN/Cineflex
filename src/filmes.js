@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Header from "../header";
-import Recado from "../recado";
-import "./style.css";
-//import Lista from "../filmes";
-
-function Filmes() {
+export default function Lista() {
 	const [filmes, setFilmes] = useState([]);
 
 	useEffect(() => {
@@ -24,22 +19,10 @@ function Filmes() {
 	console.log(filmes);
 
 	return (
-		<main className="filmes">
+		<section className="filmes">
 			{filmes.map((imagem) => (
-				<article className="filme">
-					<img src={imagem.posterURL} />
-				</article>
+				<img src="https://image.tmdb.org/t/p/w500/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg" />
 			))}
-		</main>
-	);
-}
-
-export default function TelaInicia() {
-	return (
-		<>
-			<Header />
-			<Recado texto="Selecione um filme" />
-			<Filmes />
-		</>
+		</section>
 	);
 }
