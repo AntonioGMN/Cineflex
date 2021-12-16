@@ -17,12 +17,8 @@ function Filmes() {
 
 		dados.then((resposta) => {
 			setFilmes(resposta.data);
-			//console.log(filmes);
 		});
 	}, []);
-
-	console.log("filmes");
-	console.log(filmes);
 
 	return (
 		<main className="filmes">
