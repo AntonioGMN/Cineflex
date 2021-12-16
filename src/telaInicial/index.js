@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../header";
@@ -25,10 +26,12 @@ function Filmes() {
 
 	return (
 		<main className="filmes">
-			{filmes.map((imagem) => (
-				<article className="filme">
-					<img src={imagem.posterURL} />
-				</article>
+			{filmes.map((filme) => (
+				<Link to={`/filme/${filme.id}/`}>
+					<article className="filme">
+						<img src={filme.posterURL} />
+					</article>
+				</Link>
 			))}
 		</main>
 	);
