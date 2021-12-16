@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Header from "../header";
 import Recado from "../recado";
+import Rodape from "../rodape";
 import axios from "axios";
 import "./style.css";
 
@@ -26,18 +27,21 @@ function Sessoes() {
 
 	//if (dados != undefined) {
 	return (
-		<section className="horarios">
-			{dados.map((dia) => (
-				<article className="dia">
-					<p>
-						{dia.weekday} - {dia.date}
-					</p>
-					{dia.showtimes.map((hora) => (
-						<button>{hora.name}</button>
-					))}
-				</article>
-			))}
-		</section>
+		<>
+			<section className="horarios">
+				{dados.map((dia) => (
+					<article className="dia">
+						<p>
+							{dia.weekday} - {dia.date}
+						</p>
+						{dia.showtimes.map((hora) => (
+							<button>{hora.name}</button>
+						))}
+					</article>
+				))}
+			</section>
+			<Rodape horario={""} />
+		</>
 	);
 	//}
 }
@@ -48,10 +52,6 @@ export default function Filme() {
 			<Header />
 			<Recado texto="Selecione o horário" />
 			<Sessoes />
-
-			<Link to="/">
-				<button></button>
-			</Link>
 		</main>
 	);
 }

@@ -1,0 +1,24 @@
+.rodape {
+	background: #dfe6ed;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+.rodape div p {
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.rodape img {
+	height: 20vh;
+	width: 30vw;
+	border: 10px #ffffff solid;
+	margin-right: 22px;
+}
