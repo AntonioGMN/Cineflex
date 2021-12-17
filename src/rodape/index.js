@@ -6,12 +6,12 @@ import axios from "axios";
 import "./style.css";
 
 export default function Rodape() {
-	const { id } = useParams();
+	const { idFilme } = useParams();
 	const [dados, setDados] = useState([]);
 
 	useEffect(() => {
 		const promessa = axios.get(
-			`https://mock-api.driven.com.br/api/v4/cineflex/movies/${id}/showtimes`
+			`https://mock-api.driven.com.br/api/v4/cineflex/movies/${idFilme}/showtimes`
 		);
 		promessa.then((resposta) => setDados(resposta.data));
 	}, []);

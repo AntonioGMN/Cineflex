@@ -13,12 +13,12 @@ import "./style.css";
 // }
 
 function Sessoes() {
-	const { id } = useParams();
+	const { idFilme } = useParams();
 	const [dados, setDados] = useState([]);
 
 	useEffect(() => {
 		const promessa = axios.get(
-			`https://mock-api.driven.com.br/api/v4/cineflex/movies/${id}/showtimes`
+			`https://mock-api.driven.com.br/api/v4/cineflex/movies/${idFilme}/showtimes`
 		);
 		promessa.then((resposta) => setDados(resposta.data.days));
 	}, []);
@@ -35,12 +35,13 @@ function Sessoes() {
 							{dia.weekday} - {dia.date}
 						</p>
 						{dia.showtimes.map((hora) => (
-							<button>{hora.name}</button>
+							<Link to={`/assentos/${hora.id}`}>
+								<button>{hora.name}</button>
+							</Link>
 						))}
 					</article>
 				))}
 			</section>
-			<Rodape horario={""} />
 		</>
 	);
 	//}
@@ -52,6 +53,7 @@ export default function Filme() {
 			<Header />
 			<Recado texto="Selecione o horário" />
 			<Sessoes />
+			<Rodape />
 		</main>
 	);
 }

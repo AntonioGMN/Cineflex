@@ -10,7 +10,8 @@ export default function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<TelaInicial />}></Route>
-				<Route path="/filme/:id" element={<Filme />}></Route>
+				<Route path="/sessoes/:idFilme" element={<Filme />}></Route>
+				<Route path="/assentos/:idSessao" element={<Acentos />}></Route>
 			</Routes>
 		</BrowserRouter>
 	);

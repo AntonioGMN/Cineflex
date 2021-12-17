@@ -23,7 +23,7 @@ function Filmes() {
 	return (
 		<main className="filmes">
 			{filmes.map((filme) => (
-				<Link to={`/filme/${filme.id}/`}>
+				<Link to={`/sessoes/${filme.id}/`}>
 					<article className="filme">
 						<img src={filme.posterURL} />
 					</article>
