@@ -23,19 +23,17 @@ function Sessoes() {
 		promessa.then((resposta) => setDados(resposta.data.days));
 	}, []);
 
-	console.log(dados);
-
 	//if (dados != undefined) {
 	return (
 		<>
 			<section className="horarios">
 				{dados.map((dia) => (
-					<article className="dia">
+					<article key={dia.id} className="dia">
 						<p>
 							{dia.weekday} - {dia.date}
 						</p>
 						{dia.showtimes.map((hora) => (
-							<Link to={`/assentos/${hora.id}`}>
+							<Link key={hora.id} to={`/assentos/${hora.id}`}>
 								<button>{hora.name}</button>
 							</Link>
 						))}

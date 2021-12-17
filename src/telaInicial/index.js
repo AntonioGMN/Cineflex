@@ -20,10 +20,12 @@ function Filmes() {
 		});
 	}, []);
 
+	if (filmes.length === 0) return "Carregando";
+
 	return (
 		<main className="filmes">
 			{filmes.map((filme) => (
-				<Link to={`/sessoes/${filme.id}/`}>
+				<Link key={filme.id} to={`/sessoes/${filme.id}/`}>
 					<article className="filme">
 						<img src={filme.posterURL} />
 					</article>

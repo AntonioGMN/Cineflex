@@ -4,6 +4,7 @@ import TelaInicial from "./telaInicial";
 import Filme from "./telaFilme";
 import Acentos from "./telaSessão";
 import Sucesso from "./telaSucesso";
+import TelaAcentos from "./telaSessão";
 
 export default function App() {
 	return (
@@ -11,7 +12,7 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<TelaInicial />}></Route>
 				<Route path="/sessoes/:idFilme" element={<Filme />}></Route>
-				<Route path="/assentos/:idSessao" element={<Acentos />}></Route>
+				<Route path="/assentos/:idSessao" element={<TelaAcentos />}></Route>
 			</Routes>
 		</BrowserRouter>
 	);

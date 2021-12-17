@@ -1,3 +1,5 @@
+/* import styled from "styled-components" */
+
 .dadosComprador {
 	font-size: 18px;
 	font-style: normal;
@@ -21,3 +23,12 @@
 	text-align: left;
 	color: #afafaf;
 }
+
+/* const Acento = styled.button`
+height: 26px;
+width: 26px;
+border: none;
+border-radius: 12px;
+`
+
+export default Acento; */
