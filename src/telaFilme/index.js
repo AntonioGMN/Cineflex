@@ -7,11 +7,6 @@ import Rodape from "../rodape";
 import axios from "axios";
 import "./style.css";
 
-// function Horas({ texto }) {
-// 	//return `${texto}`;
-// 	return { texto };
-// }
-
 function Sessoes() {
 	const { idFilme } = useParams();
 	const [dados, setDados] = useState([]);
@@ -23,7 +18,6 @@ function Sessoes() {
 		promessa.then((resposta) => setDados(resposta.data.days));
 	}, []);
 
-	//if (dados != undefined) {
 	return (
 		<>
 			<section className="horarios">
@@ -42,7 +36,6 @@ function Sessoes() {
 			</section>
 		</>
 	);
-	//}
 }
 
 export default function Filme() {
