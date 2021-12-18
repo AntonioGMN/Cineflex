@@ -8,6 +8,7 @@ import "./style.css";
 export default function Rodape() {
 	const { idFilme } = useParams();
 	const { idSessao } = useParams();
+
 	const [dados, setDados] = useState([]);
 
 	useEffect(() => {
@@ -33,6 +34,10 @@ export default function Rodape() {
 				</div>
 			</footer>
 		);
+	}
+
+	if (dados.length === 0) {
+		return "carregando";
 	}
 
 	return (

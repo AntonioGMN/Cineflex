@@ -8,6 +8,24 @@ import Rodape from "../rodape";
 import styled from "styled-components";
 import "./style.css";
 
+// function Salvando([nome, cpf, ids]) {
+// 	const [salvo, setSalvo] = useState({
+// 		ids: { ids },
+// 		name: { nome },
+// 		cpf: { cpf },
+// 	});
+// }
+
+function Salvando() {
+	const [salvo, setSalvo] = useState({
+		ids: [2, 5, 17],
+		name: "antonio",
+		cpf: "1234567",
+	});
+
+	return salvo;
+}
+
 function Acento({ children, disponivel }) {
 	const [selecionado, setSelecionado] = useState(false);
 
@@ -29,15 +47,12 @@ function Lugares() {
 	const { idSessao } = useParams();
 	const [dados, setDados] = useState([]);
 
-	const [teste, setTeste] = useState([]);
-
 	useEffect(() => {
 		const promessa = axios.get(
 			`https://mock-api.driven.com.br/api/v4/cineflex/showtimes/${idSessao}/seats`
 		);
 		promessa.then((resposta) => {
 			setDados(resposta.data);
-			setTeste(resposta.data.seats);
 		});
 	}, []);
 
@@ -95,7 +110,9 @@ export default function TelaAcentos() {
 				<Lugares />
 				<Legendas />
 				<Comprador />
-				<Reservar>Reservar assento(s)</Reservar>
+				<Link to="/sucesso/">
+					<Reservar>Reservar assento(s)</Reservar>
+				</Link>
 			</MainTela>
 			<Rodape />
 		</>
