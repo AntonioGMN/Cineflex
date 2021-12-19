@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Header from "../header";
 
-export default function TelaSucesso() {
+export default function TelaSucesso({ name, cpf, ids }) {
+	console.log(name);
+	console.log(cpf);
+	console.log(ids);
 	return (
 		<>
 			<Header />

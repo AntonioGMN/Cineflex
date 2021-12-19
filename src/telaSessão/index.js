@@ -1,75 +1,11 @@
-import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Header from "../header";
 import Recado from "../recado";
 import Rodape from "../rodape";
+import Lugares from "./Lugares";
 import styled from "styled-components";
 import "./style.css";
-
-// function Salvando([nome, cpf, ids]) {
-// 	const [salvo, setSalvo] = useState({
-// 		ids: { ids },
-// 		name: { nome },
-// 		cpf: { cpf },
-// 	});
-// }
-
-function Salvando() {
-	const [salvo, setSalvo] = useState({
-		ids: [2, 5, 17],
-		name: "antonio",
-		cpf: "1234567",
-	});
-
-	return salvo;
-}
-
-function Acento({ children, disponivel }) {
-	const [selecionado, setSelecionado] = useState(false);
-
-	return (
-		<AcentoConteudo
-			selecionado={selecionado}
-			disponivel={disponivel}
-			onClick={() => {
-				if (disponivel) selecionado ? setSelecionado(false) : setSelecionado(true);
-				else alert("Esse assento não está disponível");
-			}}
-		>
-			{children}
-		</AcentoConteudo>
-	);
-}
-
-function Lugares() {
-	const { idSessao } = useParams();
-	const [dados, setDados] = useState([]);
-
-	useEffect(() => {
-		const promessa = axios.get(
-			`https://mock-api.driven.com.br/api/v4/cineflex/showtimes/${idSessao}/seats`
-		);
-		promessa.then((resposta) => {
-			setDados(resposta.data);
-		});
-	}, []);
-
-	if (dados.length === 0) {
-		return <Acentos>Carregando</Acentos>;
-	}
-
-	return (
-		<Acentos>
-			{dados.seats.map((dado) => (
-				<Acento disponivel={dado.isAvailable} key={dado.name}>
-					{dado.name}
-				</Acento>
-			))}
-		</Acentos>
-	);
-}
 
 function Legendas() {
 	return (
@@ -90,26 +26,43 @@ function Legendas() {
 	);
 }
 
-function Comprador() {
+function Comprador({ nome, mudaNome, cpf, mudaCpf }) {
 	return (
 		<DadosComprador>
 			Nome do comprador:
-			<input></input>
+			<input
+				placeholder="Digite seu nome..."
+				type="text"
+				value={nome}
+				onChange={(e) => mudaNome(e.target.value)}
+			/>
 			CPF do comprador:
-			<input></input>
+			<input
+				placeholder="Digite seu CPF..."
+				type="text"
+				value={cpf}
+				onChange={(e) => mudaCpf(e.target.value)}
+			/>
 		</DadosComprador>
 	);
 }
 
-export default function TelaAcentos() {
+export default function TelaAcentos({
+	name,
+	setName,
+	cpf,
+	setCpf,
+	ids,
+	setIds,
+}) {
 	return (
 		<>
 			<Header />
 			<MainTela>
 				<Recado texto="Selecione o(s) assento(s)" />
-				<Lugares />
+				<Lugares ids={ids} setIds={setIds} />
 				<Legendas />
-				<Comprador />
+				<Comprador mudaNome={setName} nome={name} cpf={cpf} mudaCpf={setCpf} />
 				<Link to="/sucesso/">
 					<Reservar>Reservar assento(s)</Reservar>
 				</Link>
@@ -127,22 +80,6 @@ const MainTela = styled.main`
 	.selecionado {
 		background: #8dd7cf;
 	}
-`;
-
-const Acentos = styled.section`
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-`;
-
-const AcentoConteudo = styled.button`
-	height: 26px;
-	width: 26px;
-	border: none;
-	border-radius: 12px;
-	background: ${(props) =>
-		props.selecionado ? "#8DD7CF" : props.disponivel ? "#C3CFD9" : "#FBE192"};
-	margin: 0 7px 18px 0;
 `;
 
 const Legenda = styled.section`
