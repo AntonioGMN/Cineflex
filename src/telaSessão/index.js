@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Header from "../header";
 import Recado from "../recado";
@@ -6,6 +6,8 @@ import Rodape from "../rodape";
 import Lugares from "./Lugares";
 import styled from "styled-components";
 import "./style.css";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Legendas() {
 	return (
@@ -54,17 +56,41 @@ export default function TelaAcentos({
 	setCpf,
 	ids,
 	setIds,
+	assentos,
+	setAssentos,
 }) {
+	const { idSessao } = useParams();
+
+	function reserva(nome, cpf, ids) {
+		const dados = {
+			ids: [...ids],
+			name: nome,
+			cpf: cpf,
+		};
+
+		axios.post(
+			"https://mock-api.driven.com.br/api/v4/cineflex/seats/book-many",
+			dados
+		);
+	}
+
 	return (
 		<>
 			<Header />
 			<MainTela>
 				<Recado texto="Selecione o(s) assento(s)" />
-				<Lugares ids={ids} setIds={setIds} />
+				<Lugares
+					ids={ids}
+					setIds={setIds}
+					assentos={assentos}
+					setAssentos={setAssentos}
+				/>
 				<Legendas />
 				<Comprador mudaNome={setName} nome={name} cpf={cpf} mudaCpf={setCpf} />
-				<Link to="/sucesso/">
-					<Reservar>Reservar assento(s)</Reservar>
+				<Link to={`/sucesso/${idSessao}`}>
+					<Reservar onClick={() => reserva(name, cpf, ids)}>
+						Reservar assento(s)
+					</Reservar>
 				</Link>
 			</MainTela>
 			<Rodape />
@@ -136,6 +162,6 @@ const Reservar = styled.button`
 	border: none;
 	background: #e8833a;
 	border-radius: 3px;
-	align-self: center;
-	margin: 57px 0 30px 0;
+	margin: 57px auto 30px auto;
+	color: #ffffff;
 `;

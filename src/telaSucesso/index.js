@@ -1,12 +1,25 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import Header from "../header";
 
-export default function TelaSucesso({ name, cpf, ids }) {
-	console.log(name);
-	console.log(cpf);
-	console.log(ids);
+export default function TelaSucesso({ name, cpf, ids, assentos }) {
+	const [dados, setDados] = useState([]);
+	const { idSucesso } = useParams();
+
+	useEffect(() => {
+		const promessa = axios.get(
+			`https://mock-api.driven.com.br/api/v4/cineflex/showtimes/${idSucesso}/seats`
+		);
+		promessa.then((resposta) => setDados(resposta.data));
+	}, []);
+
+	if (dados.length === 0) {
+		return "carregando";
+	}
+
 	return (
 		<>
 			<Header />
@@ -14,15 +27,21 @@ export default function TelaSucesso({ name, cpf, ids }) {
 			<Sucesso>
 				<div>
 					<h1>Filme e sessão</h1>
-					<p>nome do filme</p>
+					<p>{dados.movie.title}</p>
+					<p>
+						{dados.day.date} {dados.name}
+					</p>
 				</div>
 				<div>
 					<h1>Ingressos</h1>
-					<p>lugares</p>
+					{assentos.map((l) => (
+						<p key={l}>Assento {l}</p>
+					))}
 				</div>
 				<div>
 					<h1>Comprador</h1>
-					<p>Infromaçoes comprador</p>
+					<p>Nome: {name}</p>
+					<p>CPF: {cpf}</p>
 				</div>
 				<Link to="/">
 					<button>Voltar pra Home</button>

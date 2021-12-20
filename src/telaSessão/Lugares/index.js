@@ -3,23 +3,37 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-function Acento({ children, disponivel, ids, setIds, novoId }) {
+function Acento({
+	children,
+	disponivel,
+	ids,
+	setIds,
+	novoId,
+	assentos,
+	setAssentos,
+	novoAssento,
+}) {
 	const [selecionado, setSelecionado] = useState(false);
 
-	function addId(novo) {
+	function addId(novoId, novoAssento) {
 		if (ids.length != 0) {
-			if (!ids.includes(novo)) {
-				const aux = [...ids, novo];
+			if (!ids.includes(novoId)) {
+				const aux = [...ids, novoId];
+				const auxSessao = [...assentos, novoAssento];
 				setIds(aux);
+				setAssentos(auxSessao);
 			}
 		} else {
-			const aux = [...ids, novo];
+			const aux = [...ids, novoId];
+			const auxSessao = [...assentos, novoAssento];
 			setIds(aux);
+			setAssentos(auxSessao);
 		}
 	}
 
-	function reomveId(novo) {
-		setIds(ids.filter((x) => x != novo));
+	function reomveId(novoId, novoAssento) {
+		setIds(ids.filter((x) => x != novoId));
+		setAssentos(assentos.filter((x) => x != novoAssento));
 	}
 
 	return (
@@ -29,10 +43,10 @@ function Acento({ children, disponivel, ids, setIds, novoId }) {
 			onClick={() => {
 				if (disponivel) {
 					if (selecionado) {
-						reomveId(novoId);
+						reomveId(novoId, novoAssento);
 						setSelecionado(false);
 					} else {
-						addId(novoId);
+						addId(novoId, novoAssento);
 						setSelecionado(true);
 					}
 				} else alert("Esse assento não está disponível");
@@ -43,8 +57,9 @@ function Acento({ children, disponivel, ids, setIds, novoId }) {
 	);
 }
 
-export default function Lugares({ ids, setIds }) {
+export default function Lugares({ ids, setIds, assentos, setAssentos }) {
 	const { idSessao } = useParams();
+
 	const [dados, setDados] = useState([]);
 
 	useEffect(() => {
@@ -69,6 +84,9 @@ export default function Lugares({ ids, setIds }) {
 					novoId={dado.id}
 					setIds={setIds}
 					key={dado.name}
+					assentos={assentos}
+					novoAssento={dado.name}
+					setAssentos={setAssentos}
 				>
 					{dado.name}
 				</Acento>

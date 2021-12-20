@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import TelaInicial from "./telaInicial";
 import Filme from "./telaFilme";
-import Acentos from "./telaSessão";
 import TelaSucesso from "./telaSucesso";
 import TelaAcentos from "./telaSessão";
 
@@ -11,6 +10,7 @@ export default function App() {
 	const [name, setName] = useState("");
 	const [cpf, setCpf] = useState("");
 	const [ids, setIds] = useState([]);
+	const [assentos, setAssentos] = useState([]);
 
 	return (
 		<BrowserRouter>
@@ -27,12 +27,16 @@ export default function App() {
 							setCpf={setCpf}
 							ids={ids}
 							setIds={setIds}
+							assentos={assentos}
+							setAssentos={setAssentos}
 						/>
 					}
 				></Route>
 				<Route
-					path="/sucesso"
-					element={<TelaSucesso name={name} cpf={cpf} ids={ids} />}
+					path="/sucesso/:idSucesso"
+					element={
+						<TelaSucesso name={name} cpf={cpf} ids={ids} assentos={assentos} />
+					}
 				></Route>
 			</Routes>
 		</BrowserRouter>
